@@ -9,14 +9,15 @@ const app = express();
 // we Ask passport to create an instance of google startegy. and we give it corresponding info.
 passport.use(new GoogleStrategy(
     {
-       clientID = keys.appGoogleClientID,
-       clientSecret = keys.appGoogleClientSecret,
-       callbackURL = '/auth/google/callback' 
+       clientID: keys.appGoogleClientID,
+       clientSecret: keys.appGoogleClientSecret,
+       callbackURL: '/auth/google/callback' 
     }, (accessToken) => { // just to see what is given back to us from google.
         console.log(accessToken);
     }
 ));
 
+console.log("homal")
 app.get('/', (req, res) => {
     res.send({age: 22});
 })
