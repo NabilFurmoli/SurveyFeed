@@ -1,33 +1,40 @@
 
 
 const express = require('express');
-const keys = require('./config/secrets');
+const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const app = express();
+const keys = require('./config/secrets');
 
-// we Ask passport to create an instance of google startegy. and we give it corresponding info.
-passport.use(new GoogleStrategy(
-    {
-       clientID: keys.appGoogleClientID,
-       clientSecret: keys.appGoogleClientSecret,
-       callbackURL: '/auth/google/callback' 
-    }, (accessToken) => { // just to see what is given back to us from google.
-        console.log(accessToken);
-    }
-));
+require('./models/User');
+//connecting to the database.
+mongoose.connect(keys.mongoURI);
 
-console.log("homal")
-app.get('/', (req, res) => {
-    res.send({age: 22});
+// this says to just execute the required file here.
+require('./services/passport');
+
+const app  = new express();
+
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    // a key that we give and cookie-session encrypts our token.
+    keys: [keys.cookieKey]  
+}))
+
+// this asks passport to make use of cookies to hundle authentication.
+app.use(passport.initialize());
+app.use(passport.session());
+
+// authRoutes is a function imported from authRoutes.js file so that we can execute the auth routes.
+// or we could have simply execute as: require('./routes/authRoutes')(app);
+const authRoutes = require('./routes/authRoutes');
+authRoutes(app);
+
+app.get('/user/userExist', (req, res) => {
+    console.log(req.user);
+    res.send(req.user);
 })
-
-// with this route start the authentication process.
-app.get('/auth/google', passport.authenticate('google', {
-        scope: ['profile', 'email'] // we only ask for profile and email of user.
-    }
-))
-
-// TO Find the underlying port number heroku assignes us in runtime, if not 5000 by default
+// TO Find the underlying port number heroku assignes us in runtime, if not, 5000 by default
 const PORT = process.env.PORT || 5000; 
 app.listen(PORT)
+
