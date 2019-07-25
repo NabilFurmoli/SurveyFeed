@@ -28,7 +28,8 @@ passport.use(new GoogleStrategy(
     {
        clientID: keys.GoogleClientID,
        clientSecret: keys.GoogleClientSecret,
-       callbackURL: '/auth/google/callback' // this has to added into your google api.
+       callbackURL: '/auth/google/callback', // this has to added into your google api.
+       proxy: true // this makes sure the google redirection is to https instead of http. 
     }, (accessToken, refreshToken, profile, done) => {
         // after we asked google for profile info in line 34 ,using the code given,
         // to us. thee passport got the progile info and now it calls the second argument of google strategy. her we can store those user info into our database.
