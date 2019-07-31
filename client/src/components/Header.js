@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -31,14 +32,35 @@ import {
             return (
               <NavLink href={'/auth/google'}>Login</NavLink>
             );
+        } else {
+          return (
+            <NavLink href={'/auth/google'}>Login</NavLink>
+          );
         }
+    }
+
+    logoRender = () => {
+      if (this.props.auth) {
+        return (
+          <Link to="/surveys">
+              <NavbarBrand >SurveyFeed</NavbarBrand>
+          </Link>
+        );
+        
+      } else if (this.props.auth === false) {
+        return (
+          <Link to="/">
+              <NavbarBrand >SurveyFeed</NavbarBrand>
+          </Link>
+        );
+      }
     }
 
     render() {
       return (
         <div>
           <Navbar  light expand="md">
-            <NavbarBrand href="/index.html">SurveyFeed</NavbarBrand>
+            {this.logoRender()}
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>

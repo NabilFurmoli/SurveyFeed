@@ -11,7 +11,8 @@ import Surveys from './Surveys';
 
 class App extends Component {
 
-    componentDidMount () {
+    constructor (props) {
+        super(props);
         this.props.fetchUser();
     }
 

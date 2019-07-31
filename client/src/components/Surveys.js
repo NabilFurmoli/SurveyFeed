@@ -8,8 +8,7 @@ class Surveys extends Component {
     render () {
         return (
             <div>
-                <h1>Surveys Page</h1>
-                
+                <h1>Surveys Page</h1>                
             </div>
         );
     }
