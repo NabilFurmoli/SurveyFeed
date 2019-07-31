@@ -14,9 +14,14 @@ module.exports = (app) => {
     ))
     
     // now we call pass.authenticate again, this time it behaves diferently since passport sees that the redirected url includes a code. 
-    app.get('/auth/google/callback', passport.authenticate('google'));
-
-    app.get('/api/logout', (req, res) => {
-        req.logout();
+    app.get('/auth/google/callback', passport.authenticate('google'),
+    (req, res) => {
+        res.redirect('/surveys');
     });
+
+    
+    app.get('/api/current_user', (req, res) => {
+        console.log(req.user);
+        res.send(req.user);
+    })
 };

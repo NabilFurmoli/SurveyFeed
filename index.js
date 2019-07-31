@@ -7,8 +7,13 @@ const passport = require('passport');
 const keys = require('./config/secrets');
 
 require('./models/User');
+
 //connecting to the database.
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI).then(() => {
+    console.log("Connected to Database");
+    }).catch((err) => {
+        console.log("Not Connected to Database ERROR! ", err);
+    });
 
 // this says to just execute the required file here.
 require('./services/passport');
@@ -30,11 +35,15 @@ app.use(passport.session());
 const authRoutes = require('./routes/authRoutes');
 authRoutes(app);
 
-app.get('/user/userExist', (req, res) => {
-    console.log(req.user);
-    res.send(req.user);
-})
+app.get('/api/logout', function(req, res) {
+    //removeFrom_usertabele(req);
+    console.log("logging out");
+    req.logout();
+    res.redirect("/");
+  });
 // TO Find the underlying port number heroku assignes us in runtime, if not, 5000 by default
 const PORT = process.env.PORT || 5000; 
-app.listen(PORT)
+app.listen(PORT, () => {
+    console.log("listening....");
+})
 
