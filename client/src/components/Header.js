@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
+import Payments from './Payments';
 import {
     Collapse,
     Navbar,
@@ -11,6 +12,7 @@ import {
     NavItem,
     NavLink,
    } from 'reactstrap';
+
   
   class Header extends React.Component {
 
@@ -22,28 +24,36 @@ import {
       });
     }
 
-    LogStatusRender = () => {
+    navBarRender = () => {
         if (this.props.auth) {
             return (
-              <NavLink href={'/api/logout'}>Logout</NavLink>
+              <>
+                <NavItem>
+                  <Payments/>
+                </NavItem> 
+                <NavItem>
+                  <NavLink >Credits: {this.props.auth.credits}</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href={'/api/logout'}>Logout</NavLink>
+                </NavItem>
+              </>
             );
             
         } else if (this.props.auth === false) {
             return (
-              <NavLink href={'/auth/google'}>Login</NavLink>
+              <NavItem>
+                 <NavLink href={'/auth/google'}>Login</NavLink>
+              </NavItem> 
             );
-        } else {
-          return (
-            <NavLink href={'/auth/google'}>Login</NavLink>
-          );
-        }
+        } 
     }
 
     logoRender = () => {
       if (this.props.auth) {
         return (
           <Link to="/surveys">
-              <NavbarBrand >SurveyFeed</NavbarBrand>
+              <NavbarBrand>SurveyFeed</NavbarBrand>
           </Link>
         );
         
@@ -57,6 +67,7 @@ import {
     }
 
     render() {
+      console.log(this.props);
       return (
         <div>
           <Navbar  light expand="md">
@@ -64,12 +75,7 @@ import {
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink >Emails</NavLink>
-                </NavItem>
-                <NavItem>
-                  {this.LogStatusRender()}
-                </NavItem>
+                {this.navBarRender()}
               </Nav>
             </Collapse>
           </Navbar>
@@ -81,7 +87,7 @@ import {
 
 // state is the state in redux.
 const mapStateToProps = state => {
-    return { auth: state.auth }; // this object is what is passed as props into SongList components
+    return { auth: state.auth}; // this object is what is passed as props into SongList components
   };
   
 export default connect(
