@@ -8,6 +8,7 @@ const keys = require('./config/secrets');
 const bodyParser = require('body-parser');
 
 require('./models/User');
+require('./models/Surveys');
 
 //connecting to the database.
 mongoose.connect(keys.mongoURI).then(() => {
@@ -49,6 +50,8 @@ app.get('/api/logout', function(req, res) {
 //Billing Routes
 const billingRoutes = require('./routes/billingRoutes');
 billingRoutes(app);
+
+require('./routes/surveyRoutes')(app);
 
 
 if (process.env.NODE_ENV === 'production') {
