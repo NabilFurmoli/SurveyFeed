@@ -8,7 +8,6 @@ import Landing from './Landing';
 import Surveys from './Surveys';
 
 
-
 class App extends Component {
 
     constructor (props) {
@@ -20,8 +19,8 @@ class App extends Component {
         return (
             <div className="container">
                 <BrowserRouter>
-                    <Header/>
                     <div>
+                        <Header/>
                         <Route exact path="/" component={Landing}></Route>   
                         <Route exact path="/surveys" component={Surveys}></Route>
                     </div>

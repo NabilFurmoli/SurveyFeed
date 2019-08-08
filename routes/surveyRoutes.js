@@ -1,40 +1,60 @@
 
+
 const mongoose = require('mongoose');
-// one parameter mangoose.model() reads from database
-const Survey = mongoose.model('surveys');
-const Mailer = require('../services/Mailer');
-const surveytemplate = require('../services/EmailTemplate.js')
-
 const requireLogin = require('../middlewares/requireLogin');
-const requireCredits = require('../middlewares/requireCredits'); 
+const requireCredits = require('../middlewares/requireCredits');
+const Mailer = require('../services/Mailer');
+const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
-module.exports =  (app) => {
-    app.post('/api/surveys', requireLogin, requireCredits, sendSurveyHundler);
-}
+const Survey = mongoose.model('surveys');
 
+module.exports = app => {
 
-const sendSurveyHundler = async (req, res) => {
+  app.get('/api/surveys/thanks', (req, res) => {
+    res.send(`
+    <html>
+        <body>
+        <div style="text-align: center;">
+            <h1>its our pleasure to keep you happy. your satisfaction is our priority!</h3>
+        </div>
+        </body>
+    </html>
+      `);
+  });
 
-    let EmailsArr = req.body.recepient.split(", ");
-    let recepientsArr = [];
+  app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
+    const { title, subject, body, recipients } = req.body;
 
-    for (let i = 0; i < EmailsArr.length; i++) {
-        recepientsArr.push({email: EmailsArr[i].trim()});
-    }
-
-    let survey = await new Survey({
-        title:  req.body.title,
-        subject: req.body.subject,
-        body: req.body.body, 
-        recipients: recepientsArr,
-        _user: req.user.id,
-        dateSent: Date.now()
+    const survey = new Survey({
+      title,
+      subject,
+      body,
+      recipients: recipients.split(',').map(email => ({ email: email.trim() })),
+      _user: req.user.id,
+      dateSent: Date.now()
     });
 
-    let mailer = new Mailer(survey, surveytemplate(survey));
-    mailer.send();
+    // Great place to send an email!
+    console.log('surveyRoutes before mailer')
+    const mailer = new Mailer(survey, surveyTemplate(survey));
+    console.log('surveyRoutes after mailer')
+    try {
+      console.log('surveyRoutes before send', mailer)
+      await mailer.send();
+      await survey.save();
 
-}
+      req.user.credits -= 1;
+      const user = await req.user.save();
+      console.log('surveyRoutes after send', user)
+      res.send(user);
+
+    } catch (err) {
+      //console.log(err)
+      res.status(422).send(err);
+    }
+  });
+};
+
 
 
 

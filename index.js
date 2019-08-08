@@ -8,7 +8,7 @@ const keys = require('./config/secrets');
 const bodyParser = require('body-parser');
 
 require('./models/User');
-require('./models/Surveys');
+require('./models/Survey');
 
 //connecting to the database.
 mongoose.connect(keys.mongoURI).then(() => {
@@ -17,6 +17,7 @@ mongoose.connect(keys.mongoURI).then(() => {
         console.log("Not Connected to Database ERROR! ", err);
     });
 
+    console.log('hola')
 // this says to just execute the required file here.
 require('./services/passport');
 
