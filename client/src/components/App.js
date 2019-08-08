@@ -4,9 +4,9 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header';
-import Dashboard from './Pages/Dashboard';
+import Dashboard from './pages/Dashboard';
 import Surveys from './reusable/Surveys';
-import CreateSurvey from './Pages/CreateSurvey'
+import CreateSurvey from './pages/surveys/CreateSurvey'
 
 
 class App extends Component {
@@ -22,8 +22,8 @@ class App extends Component {
                 <BrowserRouter>
                     <div>
                         <Header/>
-                        <Route exact path="/" component={Dashboard}></Route>   
-                        <Route exact path="/surveys" component={Surveys}></Route>
+                        <Route exact path="/" component={Surveys}></Route>   
+                        <Route exact path="/surveys" component={Dashboard}></Route>
                         <Route exact path="/surveys/new" component={CreateSurvey}></Route>
                     </div>
                 </BrowserRouter>
