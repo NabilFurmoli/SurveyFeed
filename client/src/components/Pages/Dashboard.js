@@ -10,7 +10,7 @@ class Dashboard extends Component {
         return (
             <div className="fixed-action-btn">
                 <Link to="/surveys/new">
-                    <Button color='teal' content='Create New Survey' icon='add' labelPosition='left' />
+                    <Button color='teal' content='Create New Survey' icon='add' labelPosition='left' floated="right" />
                 </Link>
                 
             </div>

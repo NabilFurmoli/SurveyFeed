@@ -1,10 +1,18 @@
 
 import React from 'react'
-import { Input} from 'semantic-ui-react'
+//import { Form} from 'semantic-ui-react'
+import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const SurveyField = (props) => {
     return (
-        <Input {...props.input}/>
+
+        
+            <FormGroup row>
+                <Label md={2}>{props.label}</Label>
+                <Col md={10}>
+                    <Input {...props.input} placeholder={props.placeHolder}/>
+                </Col>
+            </FormGroup>
     )
 }
 

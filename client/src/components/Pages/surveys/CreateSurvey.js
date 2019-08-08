@@ -9,12 +9,7 @@ class CreateSurvey extends React.Component {
     render () {
         return (
             <div className="container">
-                <BrowserRouter>
-                    <div>
-                        <SurveyForm/>
-                        <Route exact path="/surveys/new/review" component={<div>asdfa</div>}></Route>
-                    </div>
-                </BrowserRouter>
+                <SurveyForm/>
             </div>
           )
     }
