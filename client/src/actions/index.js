@@ -26,10 +26,13 @@ export const handleStripeToken = (token) => {
 }
 
 
-export const sendSurvey = (formValues) => {
+export const sendSurvey = (formValues, history) => {
     return async (dispatch) => {
         const res = await axois.post('/api/surveys', formValues)
         // asuming that this route will give us update version of user data.
+
+        history.push('/surveys'); // this redirects us back to the given route.
+
         dispatch({ type: FETCH_USER, payload: res.data }); // here we just update the store auth. res.data icludes the object send from server
     }
 }

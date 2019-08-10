@@ -49,7 +49,7 @@ import {
         } 
     }
 
-    logoRender = () => {
+    onClickLogoRender = () => {
       if (this.props.auth) {
         return (
           <Link to="/surveys">
@@ -67,11 +67,11 @@ import {
     }
 
     render() {
-      console.log(this.props);
+      //console.log(this.props);
       return (
         <div>
           <Navbar  light expand="md">
-            {this.logoRender()}
+            {this.onClickLogoRender()}
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
