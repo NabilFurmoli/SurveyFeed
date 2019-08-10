@@ -13,6 +13,15 @@ const Survey = mongoose.model('surveys');
 
 module.exports = app => {
 
+  app.get('/api/surveys', requireLogin,  async (req, res) => {
+
+    // fetch all surveys with this user id except dont inculde the recipients.
+    const surveys = await Survey.find({_user: req.user.id}).select({
+      recipients: false
+    });
+    res.send(surveys);
+  })
+
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send(`
     <html>
