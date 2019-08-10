@@ -1,4 +1,5 @@
 
+
 import axois from 'axios';
 import {FETCH_USER} from './types';
 //import { type } from './types'
@@ -19,6 +20,15 @@ export const fetchUser = () => {
 export const handleStripeToken = (token) => {
     return async (dispatch) => {
         const res = await axois.post('/api/stripe', token)
+        // asuming that this route will give us update version of user data.
+        dispatch({ type: FETCH_USER, payload: res.data }); // here we just update the store auth. res.data icludes the object send from server
+    }
+}
+
+
+export const sendSurvey = (formValues) => {
+    return async (dispatch) => {
+        const res = await axois.post('/api/surveys', formValues)
         // asuming that this route will give us update version of user data.
         dispatch({ type: FETCH_USER, payload: res.data }); // here we just update the store auth. res.data icludes the object send from server
     }

@@ -1,21 +1,36 @@
-
-import React from 'react'
-import SurveyForm from './SurveyForm';
-import {BrowserRouter, Route} from 'react-router-dom';
-
-
+import React from "react";
+import SurveyForm from "./SurveyForm";
+import SurveyFromReview from "./SurveyFormReview";
+import { reduxForm, Field } from "redux-form";
 
 class CreateSurvey extends React.Component {
-    render () {
-        return (
-            <div className="container">
-                <SurveyForm/>
-            </div>
-          )
+  state = { displayReview: false };
+
+  goToReviewPage = formValues => {
+    this.setState({ displayReview: true });
+  };
+
+  goToSurveyForm = formValues => {
+    this.setState({ displayReview: false });
+  };
+
+  newOrReviewRender = displayReview => {
+    if (displayReview === false) {
+      return <SurveyForm onSurveyNext={this.goToReviewPage} />;
+    } else {
+      return <SurveyFromReview onReviewBack={this.goToSurveyForm} />;
     }
+  };
+  render() {
+    return (
+      <div className="container">
+        {this.newOrReviewRender(this.state.displayReview)}
+      </div>
+    );
+  }
 }
 
-export default CreateSurvey
-
-
-
+export default reduxForm({
+    form: "surveyForm", // adds form values into the store.
+})(CreateSurvey);
+  
