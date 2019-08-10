@@ -1,4 +1,7 @@
 
+const _ = require('lodash');
+const {Path} = require('path-parser')
+const {URL} = require('url') // from node by default.
 
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
@@ -24,6 +27,23 @@ module.exports = app => {
       `);
   });
 
+  app.post('/api/surveys/webhooks', (req, res) => {
+      const events = _.map(req.body, (event) => {
+      const pathName = new URL(event.url).pathname; // this parse just the path excluding the domain
+      const p = new Path('/api/surveys/:surveyId/:choice'); //p is an object that surveyid and choice  key and its actual values.
+      const match = p.test(pathName); // p.test returns { surveyId: '5d4e68845deb0d3ed4d470e8', choice: 'yes' }
+      
+      if(match) {
+        return {email: event.email, surveyId: match.surveyId, choice: match.choice}
+      }
+    })
+    const compactEvents = _.compact(events); // deletes udefined indices of array
+    const uniqueEvents = _.unionBy(compactEvents, 'email', 'surveyId')
+    console.log(uniqueEvents);
+
+    res.send({});
+  })
+
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
     console.log('req.body in app.post', req.body)
     const { title, subject, body, emails } = req.body;
@@ -42,7 +62,7 @@ module.exports = app => {
     const mailer = new Mailer(survey, surveyTemplate(survey));
     console.log('surveyRoutes after mailer')
     try {
-      console.log('surveyRoutes before send', mailer)
+      //console.log('surveyRoutes before send', mailer)
       await mailer.send();
       await survey.save();
 
