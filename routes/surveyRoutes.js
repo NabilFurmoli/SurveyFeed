@@ -13,7 +13,7 @@ const Survey = mongoose.model('surveys');
 
 module.exports = app => {
 
-  app.get('/api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send(`
     <html>
   
@@ -28,18 +28,33 @@ module.exports = app => {
   });
 
   app.post('/api/surveys/webhooks', (req, res) => {
-      const events = _.map(req.body, (event) => {
-      const pathName = new URL(event.url).pathname; // this parse just the path excluding the domain
-      const p = new Path('/api/surveys/:surveyId/:choice'); //p is an object that surveyid and choice  key and its actual values.
-      const match = p.test(pathName); // p.test returns { surveyId: '5d4e68845deb0d3ed4d470e8', choice: 'yes' }
-      
-      if(match) {
-        return {email: event.email, surveyId: match.surveyId, choice: match.choice}
-      }
-    })
-    const compactEvents = _.compact(events); // deletes udefined indices of array
-    const uniqueEvents = _.unionBy(compactEvents, 'email', 'surveyId')
-    console.log(uniqueEvents);
+    const p = new Path('/api/surveys/:surveyId/:choice');
+
+    _.chain(req.body)
+      .map(({ email, url }) => {
+        const match = p.test(new URL(url).pathname);
+        if (match) {
+          return { email, surveyId: match.surveyId, choice: match.choice };
+        }
+      })
+      .compact()
+      .uniqBy('email', 'surveyId')
+      .each(({ surveyId, email, choice }) => {
+        Survey.updateOne(
+          {
+            _id: surveyId,
+            recipients: {
+              $elemMatch: { email: email, responded: false }
+            }
+          },
+          {
+            $inc: { [choice]: 1 },
+            $set: { 'recipients.$.responded': true },
+            lastResponded: new Date()
+          }
+        ).exec();
+      })
+      .value();
 
     res.send({});
   })
@@ -84,3 +99,15 @@ module.exports = app => {
 
 
     
+// const events = _.map(req.body, (event) => {
+//   const pathName = new URL(event.url).pathname; // this parse just the path excluding the domain
+//   const p = new Path('/api/surveys/:surveyId/:choice'); //p is an object that surveyid and choice  key and its actual values.
+//   const match = p.test(pathName); // p.test returns { surveyId: '5d4e68845deb0d3ed4d470e8', choice: 'yes' }
+  
+//   if(match) {
+//     return {email: event.email, surveyId: match.surveyId, choice: match.choice}
+//   }
+// })
+// const compactEvents = _.compact(events); // deletes udefined indices of array
+// const uniqueEvents = _.unionBy(compactEvents, 'email', 'surveyId')
+// console.log(uniqueEvents);
