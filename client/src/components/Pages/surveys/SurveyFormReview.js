@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Message, Button, Divider } from "semantic-ui-react";
 import { connect } from "react-redux";
-import * as actions from '../../../actions'
-import {withRouter} from 'react-router-dom';
+import * as actions from "../../../actions";
+import { withRouter } from "react-router-dom";
 
 class SurveyFormReview extends React.Component {
   render() {
@@ -34,7 +34,10 @@ class SurveyFormReview extends React.Component {
         />
 
         <Button
-          onClick={() => this.props.sendSurvey(this.props.formValues, this.props.history)}
+          onClick={
+            () =>
+              this.props.sendSurvey(this.props.formValues, this.props.history) // history helps you connect to the the first upmost browser router
+          }
           type="submit"
           color="teal"
           content="Ship Survey"
@@ -48,9 +51,11 @@ class SurveyFormReview extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return { formValues: state.form.surveyForm.values };
 }
 
-export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));
-  // withRouter(SurveyFormReview) passes into props a property called history
+export default connect(
+  mapStateToProps,
+  actions
+)(withRouter(SurveyFormReview));
+// withRouter(SurveyFormReview) passes into props a property called history
