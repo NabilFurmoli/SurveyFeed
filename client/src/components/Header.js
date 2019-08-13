@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./reusable/Payments";
-import { Button,Image } from "semantic-ui-react";
+import { Button, Image } from "semantic-ui-react";
 import logo from "./SurveyFeed-Logo.png";
 import {
   Collapse,
@@ -32,10 +32,10 @@ class Header extends React.Component {
           </NavItem>
           <NavItem>
             <Button>
-            Credits: <span className=''>{this.props.auth.credits}</span>
+              Credits: <span className="">{this.props.auth.credits}</span>
             </Button>
           </NavItem>
-          <NavItem >
+          <NavItem>
             <Button href={"/api/logout"}>Logout</Button>
           </NavItem>
         </>
@@ -43,7 +43,7 @@ class Header extends React.Component {
     } else if (this.props.auth === false) {
       return (
         <NavItem>
-          <NavLink href={"/auth/google"}>Login</NavLink>
+          <Button href={"/auth/google"}>Login</Button>
         </NavItem>
       );
     }
@@ -60,8 +60,10 @@ class Header extends React.Component {
       );
     } else if (this.props.auth === false) {
       return (
-        <Link to="/">
-          <NavbarBrand>SurveyFeed</NavbarBrand>
+        <Link to="/" className=" logoDiv">
+          <NavbarBrand>
+            <Image className="w-100" src={logo} alt="logo image" />
+          </NavbarBrand>
         </Link>
       );
     }
