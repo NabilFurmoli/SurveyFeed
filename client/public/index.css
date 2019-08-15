@@ -36,3 +36,30 @@
 .introPageDiv {
     margin-top: 10vh;
 }
+
+.fast-transition {
+    position: relative; /* For positioning the pseudo-element */
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  .fast-transition::before {
+    /* Position the pseudo-element. */
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  
+    /* Create the box shadow at expanded size. */
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
+  
+    /* Hidden by default. */
+    opacity: 0;
+    transition: opacity 100ms;
+  }
+  
+  .fast-transition:hover::before {
+    /* Show the pseudo-element on hover. */
+    opacity: 1;
+  }

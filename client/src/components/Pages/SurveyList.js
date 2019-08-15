@@ -18,7 +18,7 @@ class SurveyList extends Component {
     } else {
       return this.props.userSurveys.reverse().map(survey => {
         return (
-          <Card color="teal">
+          <Card className="fast-transition" color="teal">
             <Card.Content>
               <Card.Header>{survey.title}</Card.Header>
               <Card.Meta>{survey.subject}</Card.Meta>
@@ -29,13 +29,13 @@ class SurveyList extends Component {
             </Card.Content>
             <Card.Content extra className="text-center">
               <Menu compact>
-                <Menu.Item as="a">
+                <Menu.Item as="a" disabled>
                   <Icon name="thumbs up outline" /> Yes
                   <Label color="teal" floating>
                     {survey.yes}
                   </Label>
                 </Menu.Item>
-                <Menu.Item as="a">
+                <Menu.Item as="a" disabled>
                   <Icon name="thumbs down outline" /> No
                   <Label className="NoValues" floating>
                     {survey.no}

@@ -47,7 +47,7 @@ class Dashboard extends Component {
   render() {
     console.log("props", this.props);
     return (
-      <div className="flex-fill d-flex flex-column justify-content-between mt-5">
+      <div className="flex-fill d-flex flex-column mt-5">
         <SurveyList />
 
         {this.CreateNewSurveyRender()}
