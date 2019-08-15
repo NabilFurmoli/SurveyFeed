@@ -12,8 +12,8 @@ import reducers from './reducers'; // this is where reducers are combined and im
 import reduxThunk from 'redux-thunk';
 
 // these two line are just for email testing backend
-import axios from 'axios';
-window.axios = axios;
+// import axios from 'axios';
+// window.axios = axios;
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 

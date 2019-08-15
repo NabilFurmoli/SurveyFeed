@@ -15,7 +15,7 @@ class Dashboard extends Component {
   
   render() {
     return (
-      <div className="d-flex flex-column mt-5"> 
+      <div className="flex-fill d-flex flex-column justify-content-between mt-5"> 
         <SurveyList />
         <div className="mt-5 mb-5">
           <Link to="/surveys/new">

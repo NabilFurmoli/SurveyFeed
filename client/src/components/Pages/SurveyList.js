@@ -7,7 +7,7 @@ class SurveyList extends Component {
   renderSurveys = () => {
     if (this.props.userSurveys.length === 0) {
       return (
-        <div>
+        <div className="w-75">
           <Image
             className="w-100"
             src={emptySurveysPicture}

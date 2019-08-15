@@ -18,9 +18,9 @@ class App extends Component {
 
     render () {
         return (
-            <div className="container">
+            <div className=" height-100 container">
                 <BrowserRouter>
-                    <div>
+                    <div className=" height-100 d-flex flex-column">
                         <Header/>
                         <Route exact path="/" component={Surveys}></Route>   
                         <Route exact path="/surveys" component={Dashboard}></Route>

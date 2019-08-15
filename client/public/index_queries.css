@@ -5,4 +5,8 @@
         width: 50%;
     }
 
+    .introPageMainDiv {
+        flex-direction: column;
+    }
+
 }   
