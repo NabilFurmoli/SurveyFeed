@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
 import SurveyField from "./SurveyField";
+import SurveyTextareaField from './surveyTextareaField';
 import { Link } from "react-router-dom";
 import validateEmails from "../../../utils/validateEmails";
 
@@ -30,14 +31,14 @@ class SurveyForm extends React.Component {
           name="body"
           label="Email Body"
           placeHolder="Body Content"
-          component={SurveyField}
+          component={SurveyTextareaField}
         />
         <Field
           type="text"
           name="emails"
           label="Recipients Email"
           placeHolder="Add commas between emails"
-          component={SurveyField}
+          component={SurveyTextareaField}
         />
         <Link to="/surveys">
           <Button content="Cancel" floated="left" />

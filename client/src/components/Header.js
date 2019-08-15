@@ -30,13 +30,24 @@ class Header extends React.Component {
           <NavItem className="mt-2">
             <Payments />
           </NavItem>
-          <NavItem className="mt-2">
-            <Button>
+          <NavItem className="mt-2 curser-pointer">
+            <NavLink className="hover-shadow">
               Credits: <span className="">{this.props.auth.credits}</span>
-            </Button>
+            </NavLink>
           </NavItem>
           <NavItem className="mt-2">
-            <Button href={"/api/logout"}>Logout</Button>
+            <NavLink className="d-flex hover-shadow" href={"/api/logout"}>
+              Logout
+            </NavLink>
+          </NavItem>
+          <NavItem className="mt-2">
+            <NavLink className="d-flex">
+              <Image
+                className="ml-3 logoImage rounded-circle"
+                src={this.props.auth.profilePicture}
+                alt="logo image"
+              />
+            </NavLink>
           </NavItem>
         </>
       );

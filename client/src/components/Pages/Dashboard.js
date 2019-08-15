@@ -58,7 +58,7 @@ class Dashboard extends Component {
             toggle={this.toggle}
             className={this.props.className}
           >
-            <ModalHeader toggle={this.toggle}>Please Add Credits</ModalHeader>
+            <ModalHeader className="text-danger" toggle={this.toggle}>Please Add Credits</ModalHeader>
             <ModalBody>
               Your account credits is not sufficient, please add credits before proceeding to create new survey.
             </ModalBody>

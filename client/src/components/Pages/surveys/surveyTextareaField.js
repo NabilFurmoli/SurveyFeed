@@ -9,7 +9,7 @@ const SurveyField = props => {
     <FormGroup row>
       <Label md={2}>{props.label}</Label>
       <Col md={10}>
-        <Input {...props.input} placeholder={props.placeHolder}/>
+        <Input className="h-100" type="textarea" {...props.input} placeholder={props.placeHolder}/>
       </Col>
 
       <Col>

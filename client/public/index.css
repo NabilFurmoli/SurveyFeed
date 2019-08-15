@@ -1,65 +1,84 @@
-
-
 #root {
-    height: 100%;
+  height: 100%;
 }
 
 .height-100 {
-    height: 100%;
+  height: 100%;
 }
 
 .nav-item {
-    font-size: large;
+  font-size: large;
 }
 
-
-
 .logoDiv {
-    width: 30%;
+  width: 30%;
+}
+
+.logoImage {
+  width: 30px;
+  height: 30px;
 }
 
 .addCreditsLink {
-    color: teal;
+  color: teal;
 }
 
 .creditsValue {
-    padding-left: 5px;
-    color: blue;
+  padding-left: 5px;
+  color: blue;
 }
-
 
 .navbarLinks {
-    padding-bottom: 0%;
+  padding-bottom: 0%;
 }
 
-
 .introPageDiv {
-    margin-top: 10vh;
+  margin-top: 10vh;
+}
+
+.hover-shadow:hover {
+  opacity: 1;
+  -webkit-box-shadow: 0 8px 6px -6px teal;
+  -moz-box-shadow: 0 8px 6px -6px teal;
+  box-shadow: 0 8px 6px -6px teal;
 }
 
 .fast-transition {
-    position: relative; /* For positioning the pseudo-element */
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
-  }
-  
-  .fast-transition::before {
-    /* Position the pseudo-element. */
-    content: ' ';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  
-    /* Create the box shadow at expanded size. */
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
-  
-    /* Hidden by default. */
-    opacity: 0;
-    transition: opacity 100ms;
-  }
-  
-  .fast-transition:hover::before {
-    /* Show the pseudo-element on hover. */
-    opacity: 1;
-  }
+  position: relative; /* For positioning the pseudo-element */
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+.fast-transition::before {
+  /* Position the pseudo-element. */
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Create the box shadow at expanded size. */
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
+
+  /* Hidden by default. */
+  opacity: 0;
+  transition: opacity 100ms;
+}
+
+.fast-transition:hover::before {
+  /* Show the pseudo-element on hover. */
+  opacity: 1;
+}
+
+.curser-pointer {
+  cursor: pointer;
+}
+
+.textArea-height {
+  height: 100px;
+  background-color: aquamarine;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}

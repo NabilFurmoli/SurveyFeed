@@ -50,7 +50,7 @@ class SurveyList extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="flex-grow-1">
         <Card.Group className="d-flex justify-content-center">
           {this.renderSurveys()}
         </Card.Group>
