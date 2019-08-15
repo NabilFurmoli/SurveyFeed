@@ -3,7 +3,7 @@ import introPage from "./intoPage.png";
 import introText from "./introText.png";
 import { Image } from "semantic-ui-react";
 
-class Surveys extends Component {
+class IntroPage extends Component {
   render() {
     return (
       <div className="introPageMainDiv d-flex justify-content-center align-items-center ">
@@ -27,4 +27,4 @@ class Surveys extends Component {
   }
 }
 
-export default Surveys;
+export default IntroPage;

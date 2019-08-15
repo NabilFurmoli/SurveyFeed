@@ -38,7 +38,7 @@ class SurveyForm extends React.Component {
           name="emails"
           label="Recipients Email"
           placeHolder="Add commas between emails"
-          component={SurveyTextareaField}
+          component={SurveyField}
         />
         <Link to="/surveys">
           <Button content="Cancel" floated="left" />

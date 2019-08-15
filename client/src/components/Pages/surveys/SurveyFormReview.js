@@ -12,7 +12,7 @@ class SurveyFormReview extends React.Component {
     if (this.state.isSubmitting) {
       return (
         <Button color="teal" floated="right">
-          <Spinner className="mr-2" size="sm" color="light" />
+          <Spinner className="mr-3" size="sm" color="light" />
           Submitting...
         </Button>
       );
