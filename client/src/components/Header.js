@@ -27,15 +27,15 @@ class Header extends React.Component {
     if (this.props.auth) {
       return (
         <>
-          <NavItem>
+          <NavItem className="mt-2">
             <Payments />
           </NavItem>
-          <NavItem>
+          <NavItem className="mt-2">
             <Button>
               Credits: <span className="">{this.props.auth.credits}</span>
             </Button>
           </NavItem>
-          <NavItem>
+          <NavItem className="mt-2">
             <Button href={"/api/logout"}>Logout</Button>
           </NavItem>
         </>

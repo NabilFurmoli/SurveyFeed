@@ -1,10 +1,38 @@
 import React from "react";
+import { Spinner } from "reactstrap";
 import { Container, Message, Button, Divider } from "semantic-ui-react";
 import { connect } from "react-redux";
 import * as actions from "../../../actions";
 import { withRouter } from "react-router-dom";
 
 class SurveyFormReview extends React.Component {
+  state = { isSubmitting: false };
+
+  submitButtonRender = () => {
+    if (this.state.isSubmitting) {
+      return (
+        <Button color="teal" floated="right">
+          <Spinner className="mr-2" size="sm" color="light" />
+          Submitting...
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          onClick={() => {
+            this.setState({ isSubmitting: true });
+            this.props.sendSurvey(this.props.formValues, this.props.history); // history helps you connect to the the first upmost browser router
+          }}
+          type="submit"
+          color="teal"
+          content="Ship Survey"
+          icon="shipping fast"
+          labelPosition="right"
+          floated="right"
+        />
+      );
+    }
+  };
   render() {
     return (
       <div>
@@ -32,19 +60,7 @@ class SurveyFormReview extends React.Component {
           content="Back"
           floated="left"
         />
-
-        <Button
-          onClick={
-            () =>
-              this.props.sendSurvey(this.props.formValues, this.props.history) // history helps you connect to the the first upmost browser router
-          }
-          type="submit"
-          color="teal"
-          content="Ship Survey"
-          icon="shipping fast"
-          labelPosition="right"
-          floated="right"
-        />
+        {this.submitButtonRender()}
       </div>
     );
   }
