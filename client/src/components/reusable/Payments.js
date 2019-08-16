@@ -18,7 +18,7 @@ class Payments extends Component {
         token={token => this.props.handleStripeToken(token)}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
       >
-        <Button className="addCreditsLink pt-3 pb-3" primary animated>
+        <Button className="addCreditsLink pt-3 pb-3" animated>
           <Button.Content visible>Add Credits</Button.Content>
           <Button.Content hidden>
             <Icon className="mb-3" color="teal" name="credit card outline" />

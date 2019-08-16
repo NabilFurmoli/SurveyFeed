@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./reusable/Payments";
-import { Button, Image, Icon } from "semantic-ui-react";
+import { Button, Image, Icon, Label } from "semantic-ui-react";
 import {
   Modal,
   ModalHeader,
@@ -74,6 +74,14 @@ class Header extends React.Component {
           <NavItem m-2>
             <Payments />
           </NavItem>
+          <NavItem>
+            <NavLink disabled>
+              <Button className="pt-3 pb-3">
+                Credits:{" "}
+                <span className="text-primary">{this.props.auth.credits}</span>
+              </Button>
+            </NavLink>
+          </NavItem>
           <NavItem className=" curser-pointer m-2">
             <NavLink className="p-0">{this.CreateNewSurveyRender()}</NavLink>
           </NavItem>
@@ -94,16 +102,11 @@ class Header extends React.Component {
                 </NavLink>
               </NavItem>
             </DropdownToggle>
-            <DropdownMenu right>
+            <DropdownMenu right >
               <DropdownItem>
-                Credits:{" "}
-                <span className="text-primary">{this.props.auth.credits}</span>
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>
-                <Button className="d-flex hover-shadow" href={"/api/logout"}>
+                <Label className="d-flex border-0 noTextDecoration" href={"/api/logout"}>
                   Logout
-                </Button>
+                </Label>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

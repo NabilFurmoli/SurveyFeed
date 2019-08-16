@@ -80,3 +80,7 @@
 .fixed {
   position: fixed;
 }
+
+.noTextDecoration {
+  text-decoration: none;
+}
