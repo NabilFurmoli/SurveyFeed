@@ -2,7 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./reusable/Payments";
-import { Button, Image } from "semantic-ui-react";
+import { Button, Image, Icon, Label } from "semantic-ui-react";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 import logo from "./SurveyFeed-Logo.png";
 import {
   Collapse,
@@ -15,7 +25,7 @@ import {
 } from "reactstrap";
 
 class Header extends React.Component {
-  state = { isOpen: false };
+  state = { enoughCredits: false, isOpen: false };
 
   toggle = () => {
     this.setState({
@@ -23,32 +33,86 @@ class Header extends React.Component {
     });
   };
 
+  toggleCreditsModal = () => {
+    this.setState(prevState => ({
+      enoughCredits: !prevState.enoughCredits
+    }));
+  };
+
+  creditsChecking = () => {
+    console.log("NICE", this.props.auth.credits);
+    if (this.props.auth.credits < 1) {
+      this.setState({ enoughCredits: true });
+    } else {
+      this.props.history.push("/surveys/new");
+    }
+  };
+
+  CreateNewSurveyRender = () => {
+    return (
+      <div>
+        <Button
+          className="addCreditsLink"
+          color="teal"
+          animated
+          onClick={this.creditsChecking}
+        >
+          <Button.Content visible>Create Survey</Button.Content>
+          <Button.Content hidden>
+            <Icon className="mb-3" color="white" name="add" />
+            New Survey
+          </Button.Content>
+        </Button>
+      </div>
+    );
+  };
+
   navBarRender = () => {
     if (this.props.auth) {
       return (
         <>
-          <NavItem className="mt-2">
-            <Payments />
+          <NavItem m-2>
+            <Payments className="mt-2" />
           </NavItem>
-          <NavItem className="mt-2 curser-pointer">
-            <NavLink className="hover-shadow">
-              Credits: <span className="">{this.props.auth.credits}</span>
+          <NavItem>
+            <NavLink disabled>
+              <Button className="">
+                Credits:{" "}
+                <span className="text-primary">{this.props.auth.credits}</span>
+              </Button>
             </NavLink>
           </NavItem>
-          <NavItem className="mt-2">
-            <NavLink className="d-flex hover-shadow" href={"/api/logout"}>
-              Logout
-            </NavLink>
+          <NavItem className=" curser-pointer">
+            <NavLink className="p-0">{this.CreateNewSurveyRender()}</NavLink>
           </NavItem>
-          <NavItem className="mt-2">
-            <NavLink className="d-flex">
-              <Image
-                className="ml-3 logoImage rounded-circle"
-                src={this.props.auth.profilePicture}
-                alt="logo image"
-              />
-            </NavLink>
-          </NavItem>
+
+          <UncontrolledDropdown nav inNavbar className="pr-3">
+            <DropdownToggle
+              nav
+              caret
+              className="d-flex flex-row align-items-center p-0"
+            >
+              <NavItem>
+                <NavLink className="d-flex">
+                  <Image
+                    className="ml-3 profileImage rounded-circle"
+                    src={this.props.auth.profilePicture}
+                    alt="logo image"
+                  />
+                </NavLink>
+              </NavItem>
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem>
+                <Label
+                  className="d-flex border-0 noTextDecoration"
+                  href={"/api/logout"}
+                >
+                  Logout
+                </Label>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </>
       );
     } else if (this.props.auth === false) {
@@ -81,18 +145,40 @@ class Header extends React.Component {
   };
 
   render() {
-    //console.log(this.props);
+    console.log("header", this.props);
     return (
-      <div>
-        <Navbar  light expand="md">
+      <div className="bg-white fixed-top">
+        <Navbar light expand="md">
           {this.onClickLogoRender()}
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className="ml-auto d-flex align-itm-header" navbar>
               {this.navBarRender()}
             </Nav>
           </Collapse>
         </Navbar>
+        <div>
+          <Modal
+            isOpen={this.state.enoughCredits}
+            toggle={this.toggleCreditsModal}
+            className={this.props.className}
+          >
+            <ModalHeader
+              className="text-danger"
+              toggle={this.toggleCreditsModal}
+            >
+              Please Add Credits
+            </ModalHeader>
+            <ModalBody>
+              Your account credits is not sufficient, please add credits before
+              proceeding to create new survey.
+            </ModalBody>
+            <ModalFooter>
+              <Payments />
+              <Button onClick={this.toggleCreditsModal}>Cancel</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
     );
   }

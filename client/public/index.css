@@ -11,10 +11,10 @@
 }
 
 .logoDiv {
-  width: 30%;
+  width: 20%;
 }
 
-.logoImage {
+.profileImage {
   width: 30px;
   height: 30px;
 }
@@ -36,12 +36,6 @@
   margin-top: 10vh;
 }
 
-.hover-shadow:hover {
-  opacity: 1;
-  -webkit-box-shadow: 0 8px 6px -6px teal;
-  -moz-box-shadow: 0 8px 6px -6px teal;
-  box-shadow: 0 8px 6px -6px teal;
-}
 
 .fast-transition {
   position: relative; /* For positioning the pseudo-element */
@@ -85,4 +79,16 @@
 
 .fixed {
   position: fixed;
+}
+
+.noTextDecoration {
+  text-decoration: none;
+}
+
+.mrgTop-20vh {
+  margin-top: 20vh; 
+}
+
+.align-itm-header {
+  align-items: center;
 }

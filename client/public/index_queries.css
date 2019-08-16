@@ -9,4 +9,12 @@
         flex-direction: column;
     }
 
+    .margin-2 {
+        margin: 2px;
+    }
+
+    .align-itm-header {
+        align-items: flex-start;
+    }
+
 }   
