@@ -23,7 +23,7 @@ class CreateSurvey extends React.Component {
   };
   render() {
     return (
-      <div className="container w-75 mt-5">
+      <div className="container w-75 mrgTop-20vh">
         {this.newOrReviewRender(this.state.displayReview)}
       </div>
     );

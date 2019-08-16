@@ -89,6 +89,10 @@
   margin-top: 20vh; 
 }
 
+.mrgTop-30vh {
+  margin-top: 30%;
+}
+
 .align-itm-header {
   align-items: center;
 }
