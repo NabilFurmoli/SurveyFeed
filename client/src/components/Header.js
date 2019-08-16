@@ -84,7 +84,7 @@ class Header extends React.Component {
     //console.log(this.props);
     return (
       <div>
-        <Navbar light expand="md">
+        <Navbar  light expand="md">
           {this.onClickLogoRender()}
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>

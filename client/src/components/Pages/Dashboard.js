@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import * as actions from "./../../actions";
 import SurveyList from "./SurveyList";
-import { Button } from "semantic-ui-react";
-import Payments from '../reusable/Payments'
+import { Button, Image } from "semantic-ui-react";
+import arrowLine from "./arrowLine.png";
+import Payments from "../reusable/Payments";
 
 class Dashboard extends Component {
   state = { modal: false };
@@ -31,8 +32,9 @@ class Dashboard extends Component {
 
   CreateNewSurveyRender = () => {
     return (
-      <div className="mt-5 mb-5">
+      <div className=" mb-5">
         <Button
+          className="hover-shadow mt-3"
           color="teal"
           content="Create New Survey"
           icon="add"
@@ -47,26 +49,25 @@ class Dashboard extends Component {
   render() {
     console.log("props", this.props);
     return (
-      <div className="flex-fill d-flex flex-column mt-5">
+      <div className="flex-fill d-flex flex-column mt-2">
         <SurveyList />
-
         {this.CreateNewSurveyRender()}
-
         <div>
           <Modal
             isOpen={this.state.modal}
             toggle={this.toggle}
             className={this.props.className}
           >
-            <ModalHeader className="text-danger" toggle={this.toggle}>Please Add Credits</ModalHeader>
+            <ModalHeader className="text-danger" toggle={this.toggle}>
+              Please Add Credits
+            </ModalHeader>
             <ModalBody>
-              Your account credits is not sufficient, please add credits before proceeding to create new survey.
+              Your account credits is not sufficient, please add credits before
+              proceeding to create new survey.
             </ModalBody>
             <ModalFooter>
-              <Payments/>
-              <Button onClick={this.toggle}>
-                Cancel
-              </Button>
+              <Payments />
+              <Button onClick={this.toggle}>Cancel</Button>
             </ModalFooter>
           </Modal>
         </div>
