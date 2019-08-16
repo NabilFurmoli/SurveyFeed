@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./reusable/Payments";
 import { Button, Image } from "semantic-ui-react";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import logo from "./SurveyFeed-Logo.png";
 import {
   Collapse,
@@ -15,12 +16,43 @@ import {
 } from "reactstrap";
 
 class Header extends React.Component {
-  state = { isOpen: false };
+  state = { enoughCredits: false, isOpen: false };
 
   toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  };
+
+  toggleCreditsModal = () => {
+    this.setState(prevState => ({
+      enoughCredits: !prevState.enoughCredits
+    }));
+  };
+
+  creditsChecking = () => {
+    console.log("NICE", this.props.auth.credits);
+    if (this.props.auth.credits < 1) {
+      this.setState({ enoughCredits: true });
+    } else {
+      this.props.history.push("/surveys/new");
+    }
+  };
+
+  CreateNewSurveyRender = () => {
+    return (
+      <div>
+        <Button
+          className="hover-shadow"
+          color="teal"
+          content="Create New Survey"
+          icon="add"
+          labelPosition="right"
+          floated="right"
+          onClick={this.creditsChecking}
+        />
+      </div>
+    );
   };
 
   navBarRender = () => {
@@ -29,6 +61,11 @@ class Header extends React.Component {
         <>
           <NavItem className="mt-2">
             <Payments />
+          </NavItem>
+          <NavItem className="mt-2 curser-pointer">
+            <NavLink className="p-0">
+            {this.CreateNewSurveyRender()}
+            </NavLink>
           </NavItem>
           <NavItem className="mt-2 curser-pointer">
             <NavLink className="hover-shadow">
@@ -43,7 +80,7 @@ class Header extends React.Component {
           <NavItem className="mt-2">
             <NavLink className="d-flex">
               <Image
-                className="ml-3 logoImage rounded-circle"
+                className="ml-3 profileImage rounded-circle"
                 src={this.props.auth.profilePicture}
                 alt="logo image"
               />
@@ -81,7 +118,7 @@ class Header extends React.Component {
   };
 
   render() {
-    //console.log(this.props);
+    console.log('header',this.props);
     return (
       <div>
         <Navbar  light expand="md">
@@ -93,6 +130,25 @@ class Header extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
+        <div>
+          <Modal
+            isOpen={this.state.enoughCredits}
+            toggle={this.toggleCreditsModal}
+            className={this.props.className}
+          >
+            <ModalHeader className="text-danger" toggle={this.toggleCreditsModal}>
+              Please Add Credits
+            </ModalHeader>
+            <ModalBody>
+              Your account credits is not sufficient, please add credits before
+              proceeding to create new survey.
+            </ModalBody>
+            <ModalFooter>
+              <Payments />
+              <Button onClick={this.toggleCreditsModal}>Cancel</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
     );
   }

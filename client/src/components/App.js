@@ -18,7 +18,7 @@ class App extends Component {
       <div className=" height-100 container">
         <BrowserRouter>
           <div className=" height-100 d-flex flex-column">
-            <Header />
+            <Route path="/" component={Header} />
             {(() => {
               if (this.props.auth) {
                 return <Route exact path="/" component={Dashboard} />;
