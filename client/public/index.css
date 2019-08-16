@@ -84,3 +84,11 @@
 .noTextDecoration {
   text-decoration: none;
 }
+
+.mrgTop-20vh {
+  margin-top: 20vh; 
+}
+
+.align-itm-header {
+  align-items: center;
+}

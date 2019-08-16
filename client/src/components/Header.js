@@ -52,7 +52,7 @@ class Header extends React.Component {
     return (
       <div>
         <Button
-          className="addCreditsLink pt-3 pb-3"
+          className="addCreditsLink"
           color="teal"
           animated
           onClick={this.creditsChecking}
@@ -72,25 +72,25 @@ class Header extends React.Component {
       return (
         <>
           <NavItem m-2>
-            <Payments />
+            <Payments className="mt-2" />
           </NavItem>
           <NavItem>
             <NavLink disabled>
-              <Button className="pt-3 pb-3">
+              <Button className="">
                 Credits:{" "}
                 <span className="text-primary">{this.props.auth.credits}</span>
               </Button>
             </NavLink>
           </NavItem>
-          <NavItem className=" curser-pointer m-2">
+          <NavItem className=" curser-pointer">
             <NavLink className="p-0">{this.CreateNewSurveyRender()}</NavLink>
           </NavItem>
 
-          <UncontrolledDropdown nav inNavbar className="border rounded pr-3">
+          <UncontrolledDropdown nav inNavbar className="pr-3">
             <DropdownToggle
               nav
               caret
-              className="d-flex flex-row align-items-center align-itm-strt p-0"
+              className="d-flex flex-row align-items-center p-0"
             >
               <NavItem>
                 <NavLink className="d-flex">
@@ -102,9 +102,12 @@ class Header extends React.Component {
                 </NavLink>
               </NavItem>
             </DropdownToggle>
-            <DropdownMenu right >
+            <DropdownMenu right>
               <DropdownItem>
-                <Label className="d-flex border-0 noTextDecoration" href={"/api/logout"}>
+                <Label
+                  className="d-flex border-0 noTextDecoration"
+                  href={"/api/logout"}
+                >
                   Logout
                 </Label>
               </DropdownItem>
@@ -144,12 +147,12 @@ class Header extends React.Component {
   render() {
     console.log("header", this.props);
     return (
-      <div>
+      <div className="bg-white fixed-top">
         <Navbar light expand="md">
           {this.onClickLogoRender()}
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto d-flex align-items-center" navbar>
+            <Nav className="ml-auto d-flex align-itm-header" navbar>
               {this.navBarRender()}
             </Nav>
           </Collapse>

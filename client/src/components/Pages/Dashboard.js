@@ -18,7 +18,7 @@ class Dashboard extends Component {
   render() {
     console.log("props", this.props);
     return (
-      <div className="flex-fill d-flex flex-column mt-5">
+      <div className="flex-fill d-flex flex-column mrgTop-20vh">
         <SurveyList />
         
       </div>
