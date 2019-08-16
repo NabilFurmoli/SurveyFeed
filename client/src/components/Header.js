@@ -2,8 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./reusable/Payments";
-import { Button, Image } from "semantic-ui-react";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Image, Icon } from "semantic-ui-react";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 import logo from "./SurveyFeed-Logo.png";
 import {
   Collapse,
@@ -43,14 +52,17 @@ class Header extends React.Component {
     return (
       <div>
         <Button
-          className="hover-shadow"
+          className="addCreditsLink pt-3 pb-3"
           color="teal"
-          content="Create New Survey"
-          icon="add"
-          labelPosition="right"
-          floated="right"
+          animated
           onClick={this.creditsChecking}
-        />
+        >
+          <Button.Content visible>Create Survey</Button.Content>
+          <Button.Content hidden>
+            <Icon className="mb-3" color="white" name="add" />
+            New Survey
+          </Button.Content>
+        </Button>
       </div>
     );
   };
@@ -59,33 +71,42 @@ class Header extends React.Component {
     if (this.props.auth) {
       return (
         <>
-          <NavItem className="mt-2">
+          <NavItem m-2>
             <Payments />
           </NavItem>
-          <NavItem className="mt-2 curser-pointer">
-            <NavLink className="p-0">
-            {this.CreateNewSurveyRender()}
-            </NavLink>
+          <NavItem className=" curser-pointer m-2">
+            <NavLink className="p-0">{this.CreateNewSurveyRender()}</NavLink>
           </NavItem>
-          <NavItem className="mt-2 curser-pointer">
-            <NavLink className="hover-shadow">
-              Credits: <span className="">{this.props.auth.credits}</span>
-            </NavLink>
-          </NavItem>
-          <NavItem className="mt-2">
-            <NavLink className="d-flex hover-shadow" href={"/api/logout"}>
-              Logout
-            </NavLink>
-          </NavItem>
-          <NavItem className="mt-2">
-            <NavLink className="d-flex">
-              <Image
-                className="ml-3 profileImage rounded-circle"
-                src={this.props.auth.profilePicture}
-                alt="logo image"
-              />
-            </NavLink>
-          </NavItem>
+
+          <UncontrolledDropdown nav inNavbar className="border rounded pr-3">
+            <DropdownToggle
+              nav
+              caret
+              className="d-flex flex-row align-items-center align-itm-strt p-0"
+            >
+              <NavItem>
+                <NavLink className="d-flex">
+                  <Image
+                    className="ml-3 profileImage rounded-circle"
+                    src={this.props.auth.profilePicture}
+                    alt="logo image"
+                  />
+                </NavLink>
+              </NavItem>
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem>
+                Credits:{" "}
+                <span className="text-primary">{this.props.auth.credits}</span>
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>
+                <Button className="d-flex hover-shadow" href={"/api/logout"}>
+                  Logout
+                </Button>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </>
       );
     } else if (this.props.auth === false) {
@@ -118,14 +139,14 @@ class Header extends React.Component {
   };
 
   render() {
-    console.log('header',this.props);
+    console.log("header", this.props);
     return (
       <div>
-        <Navbar  light expand="md">
+        <Navbar light expand="md">
           {this.onClickLogoRender()}
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className="ml-auto d-flex align-items-center" navbar>
               {this.navBarRender()}
             </Nav>
           </Collapse>
@@ -136,7 +157,10 @@ class Header extends React.Component {
             toggle={this.toggleCreditsModal}
             className={this.props.className}
           >
-            <ModalHeader className="text-danger" toggle={this.toggleCreditsModal}>
+            <ModalHeader
+              className="text-danger"
+              toggle={this.toggleCreditsModal}
+            >
               Please Add Credits
             </ModalHeader>
             <ModalBody>
