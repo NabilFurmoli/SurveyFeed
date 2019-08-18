@@ -1,43 +1,58 @@
+const _ = require("lodash");
+const { Path } = require("path-parser");
+const { URL } = require("url"); // from node by default.
 
-const _ = require('lodash');
-const {Path} = require('path-parser')
-const {URL} = require('url') // from node by default.
+const mongoose = require("mongoose");
+const requireLogin = require("../middlewares/requireLogin");
+const requireCredits = require("../middlewares/requireCredits");
+const Mailer = require("../services/Mailer");
+const surveyTemplate = require("../services/emailTemplates/surveyTemplate");
 
-const mongoose = require('mongoose');
-const requireLogin = require('../middlewares/requireLogin');
-const requireCredits = require('../middlewares/requireCredits');
-const Mailer = require('../services/Mailer');
-const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
-
-const Survey = mongoose.model('surveys');
+const Survey = mongoose.model("surveys");
 
 module.exports = app => {
-
-  app.get('/api/surveys', requireLogin,  async (req, res) => {
-
+  app.get("/api/surveys", requireLogin, async (req, res) => {
     // fetch all surveys with this user id except dont inculde the recipients.
-    const surveys = await Survey.find({_user: req.user.id}).select({
+    const surveys = await Survey.find({ _user: req.user.id }).select({
       recipients: false
     });
     res.send(surveys);
-  })
+  });
 
-  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
+  app.get("/api/surveys/:surveyId/:choice", (req, res) => {
     res.send(`
-    <html>
+    <html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
-          <body style=" font-family: Arial; color: grey; text-align: center; display: flex; justify-content: center; align-items: center;">
-              <div style=" padding: 5vw; background-color: #e6fff8; box-shadow: 0px 0px 20px 1px #606b9b;">
-                <h3>Its our pleasure to keep you happy. your satisfaction is our priority!</h3>
-              </div>
-          </body>
-        
-    </html>
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+      <title>Hello, world!</title>
+    </head>
+    <body class="d-flex justify-content-center align-items-center">
+    <div class="card d-flex justify-content-center align-items-center" style="width: 70rem;">
+      <i class="m-5 glyphicon glyphicon-thumbs-up" style="font-size:60px; width: 100px; color:darkgrey; text-shadow:2px 2px 4px #000000;"></i>
+      <div class="card-body">
+        <h3 class="card-text">Thank you for responding.</h3>
+      </div>
+    </div>
+  
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+  </html>
       `);
   });
 
-  app.post('/api/surveys/webhooks', (req, res) => {
-    const p = new Path('/api/surveys/:surveyId/:choice');
+  app.post("/api/surveys/webhooks", (req, res) => {
+    const p = new Path("/api/surveys/:surveyId/:choice");
 
     _.chain(req.body)
       .map(({ email, url }) => {
@@ -47,7 +62,7 @@ module.exports = app => {
         }
       })
       .compact()
-      .uniqBy('email', 'surveyId')
+      .uniqBy("email", "surveyId")
       .each(({ surveyId, email, choice }) => {
         Survey.updateOne(
           {
@@ -58,7 +73,7 @@ module.exports = app => {
           },
           {
             $inc: { [choice]: 1 },
-            $set: { 'recipients.$.responded': true },
+            $set: { "recipients.$.responded": true },
             lastResponded: new Date()
           }
         ).exec();
@@ -66,25 +81,25 @@ module.exports = app => {
       .value();
 
     res.send({});
-  })
+  });
 
-  app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
-    console.log('req.body in app.post', req.body)
+  app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
+    console.log("req.body in app.post", req.body);
     const { title, subject, body, emails } = req.body;
 
     const survey = new Survey({
       title,
       subject,
       body,
-      recipients: emails.split(',').map(email => ({ email: email.trim() })),
+      recipients: emails.split(",").map(email => ({ email: email.trim() })),
       _user: req.user.id,
       dateSent: Date.now()
     });
 
     // Great place to send an email!
-    console.log('surveyRoutes before mailer')
+    console.log("surveyRoutes before mailer");
     const mailer = new Mailer(survey, surveyTemplate(survey));
-    console.log('surveyRoutes after mailer')
+    console.log("surveyRoutes after mailer");
     try {
       //console.log('surveyRoutes before send', mailer)
       await mailer.send();
@@ -92,9 +107,8 @@ module.exports = app => {
 
       req.user.credits -= 1;
       const user = await req.user.save();
-      console.log('surveyRoutes after send', user)
+      console.log("surveyRoutes after send", user);
       res.send(user);
-
     } catch (err) {
       //console.log(err)
       res.status(422).send(err);
@@ -102,17 +116,11 @@ module.exports = app => {
   });
 };
 
-
-
-
-
-
-    
 // const events = _.map(req.body, (event) => {
 //   const pathName = new URL(event.url).pathname; // this parse just the path excluding the domain
 //   const p = new Path('/api/surveys/:surveyId/:choice'); //p is an object that surveyid and choice  key and its actual values.
 //   const match = p.test(pathName); // p.test returns { surveyId: '5d4e68845deb0d3ed4d470e8', choice: 'yes' }
-  
+
 //   if(match) {
 //     return {email: event.email, surveyId: match.surveyId, choice: match.choice}
 //   }
@@ -120,3 +128,17 @@ module.exports = app => {
 // const compactEvents = _.compact(events); // deletes udefined indices of array
 // const uniqueEvents = _.unionBy(compactEvents, 'email', 'surveyId')
 // console.log(uniqueEvents);
+
+{
+  /* <html>
+
+      
+  
+<body style=" font-family: Arial; color: grey; text-align: center; display: flex; justify-content: center; align-items: center;">
+    <div style=" padding: 5vw; background-color: #e6fff8; box-shadow: 0px 0px 20px 1px #606b9b;">
+      <p>Thank You for Responding!</p>
+    </div>
+</body>
+
+</html> */
+}

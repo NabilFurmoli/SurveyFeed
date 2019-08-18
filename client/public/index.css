@@ -2,6 +2,12 @@
   height: 100%;
 }
 
+.headerDiv {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+}
+
 .height-100 {
   height: 100%;
 }

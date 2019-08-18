@@ -147,7 +147,7 @@ class Header extends React.Component {
   render() {
     console.log("header", this.props);
     return (
-      <div className="bg-white fixed-top">
+      <div className=" headerDiv bg-white fixed-top">
         <Navbar light expand="md">
           {this.onClickLogoRender()}
           <NavbarToggler onClick={this.toggle} />

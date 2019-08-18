@@ -14,7 +14,7 @@ class IntroPage extends Component {
             alt="itro page survey image"
           />
         </div>
-        <div className="introPageDiv d-flex justify-content-center align-items-center ">
+        <div className="introPageDiv mrgTop-20vh d-flex justify-content-center align-items-center ">
           <Image
             className="w-75"
             src={introPage}
