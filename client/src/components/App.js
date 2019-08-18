@@ -5,7 +5,7 @@ import * as actions from "../actions";
 import Header from "./Header";
 import Dashboard from "./Dashboard";
 import IntroPage from "./reusable/IntroPage";
-import CreateSurvey from "./pages/surveys/CreateSurvey";
+import CreateSurvey from "./CreateSurvey";
 
 class App extends Component {
   constructor(props) {

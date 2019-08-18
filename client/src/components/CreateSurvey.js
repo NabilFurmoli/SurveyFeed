@@ -1,6 +1,6 @@
 import React from "react";
-import SurveyForm from "./SurveyForm";
-import SurveyFromReview from "./SurveyFormReview";
+import SurveyForm from "./pages/surveys/SurveyForm";
+import SurveyFromReview from "./pages/surveys/SurveyFormReview";
 import { reduxForm, Field } from "redux-form";
 
 class CreateSurvey extends React.Component {
