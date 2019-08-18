@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "../actions";
-import SurveyList from "./pages/SurveyList";
+import * as actions from "../../actions";
+import SurveyList from "./SurveyList";
 
 
 class Dashboard extends Component {
