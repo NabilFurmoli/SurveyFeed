@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "./../../actions";
-import SurveyList from "./SurveyList";
-import { Button } from "semantic-ui-react";
-import Payments from "../reusable/Payments";
+import * as actions from "../actions";
+import SurveyList from "./pages/SurveyList";
+
 
 class Dashboard extends Component {
   constructor(props) {
