@@ -12,7 +12,6 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "webhook": "ssh -R funny-owl-96:80:localhost:5000 serveo.net"
   },
   "author": "",
@@ -38,3 +37,4 @@
     "forever": "^1.0.0"
   }
 }
+
