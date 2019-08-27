@@ -7,7 +7,7 @@ class IntroPage extends Component {
   render() {
     return (
       <div className="introPageMainDiv d-flex justify-content-center align-items-center ">
-        <div className="introPageDiv d-flex justify-content-center align-items-center ">
+        <div className="introPageDiv d-flex justify-content-center align-items-center mrgTop-20vh ">
           <Image
             className="w-75"
             src={introText}
