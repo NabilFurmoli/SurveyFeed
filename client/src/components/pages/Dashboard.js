@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div onClick={this.props.bodyClickedFalsed} className="flex-fill d-flex flex-column mrgTop-20vh">
+      <div className="flex-fill d-flex flex-column mrgTop-20vh">
         <SurveyList />
         
       </div>

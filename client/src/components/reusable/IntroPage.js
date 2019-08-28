@@ -9,7 +9,7 @@ import * as actions from "../../actions";
 class IntroPage extends Component {
   render() {
     return (
-      <div onClick={this.props.bodyClickedFalsed} className="introPageMainDiv d-flex justify-content-center align-items-center ">
+      <div className="introPageMainDiv d-flex justify-content-center align-items-center ">
         <div className="introPageDiv d-flex justify-content-center align-items-center mrgTop-20vh ">
           <Image
             className="w-75"

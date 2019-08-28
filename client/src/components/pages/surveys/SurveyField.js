@@ -9,7 +9,7 @@ const SurveyField = props => {
   // {...props.input}, the input props is given by redux form that passes in events and name of feild.
   console.log("inputs", props.input);
   return (
-    <FormGroup onClick={props.bodyClickedFalsed} row>
+    <FormGroup row>
       <Label md={2}>{props.label}</Label>
       <Col md={10}>
         <Input {...props.input} placeholder={props.placeHolder} />

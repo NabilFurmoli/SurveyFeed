@@ -36,7 +36,7 @@ class SurveyFormReview extends React.Component {
   };
   render() {
     return (
-      <div onClick={this.props.bodyClickedFalsed}>
+      <div>
         <Message>
           <Message.Header>Survey Title</Message.Header>
           <p>{this.props.formValues.title}</p>
