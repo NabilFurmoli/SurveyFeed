@@ -2,14 +2,17 @@ import React from "react";
 //import { Segment } from 'semantic-ui-react'
 import { Col, Form, FormGroup, Label, Input } from "reactstrap";
 
+import { connect } from "react-redux";
+import * as actions from "../../../actions";
+
 const SurveyField = props => {
   // {...props.input}, the input props is given by redux form that passes in events and name of feild.
-  console.log('inputs', props.input)
+  console.log("inputs", props.input);
   return (
-    <FormGroup row>
+    <FormGroup onClick={props.bodyClickedFalsed} row>
       <Label md={2}>{props.label}</Label>
       <Col md={10}>
-        <Input {...props.input} placeholder={props.placeHolder}/>
+        <Input {...props.input} placeholder={props.placeHolder} />
       </Col>
 
       <Col>
@@ -21,4 +24,7 @@ const SurveyField = props => {
   );
 };
 
-export default SurveyField;
+export default connect(
+  null,
+  actions // selectSong is the actionCreater we imported
+)(SurveyField);

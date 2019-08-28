@@ -3,6 +3,7 @@ import { Spinner } from "reactstrap";
 import { Container, Message, Button, Divider } from "semantic-ui-react";
 import { connect } from "react-redux";
 import * as actions from "../../../actions";
+
 import { withRouter } from "react-router-dom";
 
 class SurveyFormReview extends React.Component {
@@ -35,7 +36,7 @@ class SurveyFormReview extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div onClick={this.props.bodyClickedFalsed}>
         <Message>
           <Message.Header>Survey Title</Message.Header>
           <p>{this.props.formValues.title}</p>

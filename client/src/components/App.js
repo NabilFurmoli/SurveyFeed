@@ -17,8 +17,9 @@ class App extends Component {
     return (
       <div className=" height-100 container">
         <BrowserRouter>
-          <div className=" height-100 d-flex flex-column">
-            <Route path="/" component={Header} />
+          <Route path="/" component={Header} />
+          <div onClick={this.props.bodyClickedFalsed} className=" height-100 d-flex flex-column">
+            
             {(() => {
               if (this.props.auth) {
                 return <Route exact path="/" component={Dashboard} />;

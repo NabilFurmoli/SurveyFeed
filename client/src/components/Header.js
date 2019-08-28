@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as actions from "../actions";
 import Payments from "./reusable/Payments";
 import { Button, Image, Icon, Label } from "semantic-ui-react";
 import {
@@ -25,12 +26,18 @@ import {
 } from "reactstrap";
 
 class Header extends React.Component {
-  state = { enoughCredits: false, isOpen: false };
+  state = { enoughCredits: false};
+
+
 
   toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+
+    if (this.props.bodyClicked === true){
+      this.props.bodyClickedFalsed();
+    } else {
+      this.props.bodyClickedTrue();
+    }
+      
   };
 
   toggleCreditsModal = () => {
@@ -145,13 +152,13 @@ class Header extends React.Component {
   };
 
   render() {
-    console.log("header", this.props);
+
     return (
       <div className=" headerDiv bg-white fixed-top">
         <Navbar light expand="md">
           {this.onClickLogoRender()}
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse isOpen={ this.props.bodyClicked } navbar>
             <Nav className="ml-auto d-flex align-itm-header" navbar>
               {this.navBarRender()}
             </Nav>
@@ -186,7 +193,10 @@ class Header extends React.Component {
 
 // state is the state in redux.
 const mapStateToProps = state => {
-  return { auth: state.auth }; // this object is what is passed as props into SongList components
+  return { 
+    auth: state.auth,
+    bodyClicked: state.bodyClicked
+  }; // this object is what is passed as props into SongList components
 };
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);
