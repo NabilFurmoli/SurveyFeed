@@ -42,10 +42,20 @@
   margin-top: 10vh;
 }
 
+.zoom {
+  transition: transform .2s; 
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
+  z-index: 2;
+}
 
 .fast-transition {
   position: relative; /* For positioning the pseudo-element */
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px 0 teal;
 }
 
 .fast-transition::before {
@@ -58,7 +68,7 @@
   left: 0;
 
   /* Create the box shadow at expanded size. */
-  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 2px 0 teal;
 
   /* Hidden by default. */
   opacity: 0;
@@ -96,7 +106,7 @@
 }
 
 .mrgTop-30vh {
-  margin-top: 30%;
+  margin-top: 30vh;
 }
 
 .align-itm-header {

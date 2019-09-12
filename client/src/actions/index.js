@@ -1,7 +1,7 @@
 
 
 import axois from 'axios';
-import {FETCH_USER, FETCH_SURVEYS} from './types';
+import {FETCH_USER, FETCH_SURVEYS, FALSIFY_BODYCLICKED, TRUE_BODYCLICKED} from './types';
 //import { type } from './types'
 
 
@@ -43,6 +43,21 @@ export const sendSurvey = (formValues, history) => {
 
         history.push('/surveys'); // this redirects us back to the given route.
         dispatch({ type: FETCH_USER, payload: res.data }); // here we just update the store auth. res.data icludes the object send from server
+    }
+}
+
+export const bodyClickedFalsed = () => {
+    console.log("hello falsed 1");
+    return async (dispatch) => {
+        console.log("hello falsed");
+        dispatch({ type: FALSIFY_BODYCLICKED, payload: false}); 
+    }
+}
+
+export const bodyClickedTrue = () => {
+    return async (dispatch) => {
+        console.log("hello trued");
+        dispatch({ type: TRUE_BODYCLICKED, payload: true}); 
     }
 }
 

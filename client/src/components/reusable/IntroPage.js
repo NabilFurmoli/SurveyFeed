@@ -3,11 +3,14 @@ import introPage from "./intoPage.png";
 import introText from "./introText.png";
 import { Image } from "semantic-ui-react";
 
+import { connect } from "react-redux";
+import * as actions from "../../actions";
+
 class IntroPage extends Component {
   render() {
     return (
       <div className="introPageMainDiv d-flex justify-content-center align-items-center ">
-        <div className="introPageDiv d-flex justify-content-center align-items-center ">
+        <div className="introPageDiv d-flex justify-content-center align-items-center mrgTop-30vh ">
           <Image
             className="w-75"
             src={introText}
@@ -27,4 +30,7 @@ class IntroPage extends Component {
   }
 }
 
-export default IntroPage;
+export default connect(
+  null,
+  actions // selectSong is the actionCreater we imported
+)(IntroPage);
