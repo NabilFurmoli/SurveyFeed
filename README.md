@@ -1,6 +1,6 @@
 # SurveyFeed
 
-web Address: https://whispering-waters-99740.herokuapp.com
+web Address: https://survey-feed.herokuapp.com
 
 Note: Feel secure to login since we use Google as a third party Authentication services. We will only have access to your full name and profile picture. To add credits to your account, we use Stripe as a third-party payment service, as of now you can simply add fake data into the credit card form, except the Card Number should be 4242 4242 4242 4242.
 
