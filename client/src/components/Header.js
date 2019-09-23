@@ -133,7 +133,7 @@ class Header extends React.Component {
                 Login
               </Button>
             }
-            content="Feel secure to login since we use Google as a third party authentication service. We will only have access to your full name and profile picture."
+            content="With Google authentication We only have access to your full name and profile picture."
             basic
           />
         </NavItem>
