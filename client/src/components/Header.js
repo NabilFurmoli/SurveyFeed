@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../actions";
+import googleIcon from "./search.png";
 import Payments from "./reusable/Payments";
 import { Button, Image, Icon, Label, Popup } from "semantic-ui-react";
 import {
@@ -124,6 +125,11 @@ class Header extends React.Component {
           <Popup
             trigger={
               <Button href={"/auth/google"} id="loginTooltip">
+                <Image
+                  className="googleIcon d-inline"
+                  src={googleIcon}
+                  alt="Google Icon"
+                />
                 Login
               </Button>
             }

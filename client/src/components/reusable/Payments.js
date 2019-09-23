@@ -32,7 +32,7 @@ class Payments extends Component {
               </Button.Content>
             </Button>
           }
-          content="Feel secure To add credits to your account, we use Stripe as a third-party payment service, as of now to use the service for free, you can simply add fake data into the credit card form, except the Card Number should be 4242 4242 4242 4242."
+          content="Feel secure To add credits, we use Stripe as a third-party payment service, to use the service for free, add fake data into the credit card form, except the Card Number should be 4242 4242 4242 4242."
           basic
         />
       </StripeCheckout>
