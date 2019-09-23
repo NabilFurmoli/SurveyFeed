@@ -42,6 +42,13 @@
   margin-top: 10vh;
 }
 
+.templatesDiv {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+.templateIcon {
+}
+
 .zoom {
   transition: transform .2s; 
 }

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import introPage from "./intoPage.png";
 import introText from "./introText.png";
+import Templates from './Templates';
 import { Image } from "semantic-ui-react";
 
 import { connect } from "react-redux";
-import * as actions from "../../actions";
+import * as actions from "../../../actions";
 
 class IntroPage extends Component {
   render() {
     return (
+      <>
       <div className="introPageMainDiv d-flex justify-content-center align-items-center ">
         <div className="introPageDiv d-flex justify-content-center align-items-center mrgTop-30vh ">
           <Image
@@ -24,8 +26,9 @@ class IntroPage extends Component {
             alt="itro page survey image"
           />
         </div>
-        
       </div>
+      <Templates/>
+      </>
     );
   }
 }

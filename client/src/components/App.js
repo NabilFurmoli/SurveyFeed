@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import Header from "./Header";
 import Dashboard from "./pages/Dashboard";
-import IntroPage from "./reusable/IntroPage";
+import IntroPage from "./pages/HomePage/IntroPage";
 import CreateSurvey from "./pages/surveys/CreateSurvey";
 
 class App extends Component {
