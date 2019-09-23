@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../actions";
 import Payments from "./reusable/Payments";
-import { Button, Image, Icon, Label } from "semantic-ui-react";
+import { Button, Image, Icon, Label, Popup } from "semantic-ui-react";
 import {
   Modal,
   ModalHeader,
@@ -26,18 +26,14 @@ import {
 } from "reactstrap";
 
 class Header extends React.Component {
-  state = { enoughCredits: false};
-
-
+  state = { enoughCredits: false };
 
   toggle = () => {
-
-    if (this.props.bodyClicked === true){
+    if (this.props.bodyClicked === true) {
       this.props.bodyClickedFalsed();
     } else {
       this.props.bodyClickedTrue();
     }
-      
   };
 
   toggleCreditsModal = () => {
@@ -125,7 +121,15 @@ class Header extends React.Component {
     } else if (this.props.auth === false) {
       return (
         <NavItem>
-          <Button href={"/auth/google"}>Login</Button>
+          <Popup
+            trigger={
+              <Button href={"/auth/google"} id="loginTooltip">
+                Login
+              </Button>
+            }
+            content="Feel secure to login since we use Google as a third party authentication service. We will only have access to your full name and profile picture."
+            basic
+          />
         </NavItem>
       );
     }
@@ -152,13 +156,12 @@ class Header extends React.Component {
   };
 
   render() {
-
     return (
       <div className=" headerDiv bg-white fixed-top">
         <Navbar light expand="md">
           {this.onClickLogoRender()}
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={ this.props.bodyClicked } navbar>
+          <Collapse isOpen={this.props.bodyClicked} navbar>
             <Nav className="ml-auto d-flex align-itm-header" navbar>
               {this.navBarRender()}
             </Nav>
@@ -193,10 +196,13 @@ class Header extends React.Component {
 
 // state is the state in redux.
 const mapStateToProps = state => {
-  return { 
+  return {
     auth: state.auth,
     bodyClicked: state.bodyClicked
   }; // this object is what is passed as props into SongList components
 };
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(
+  mapStateToProps,
+  actions
+)(Header);

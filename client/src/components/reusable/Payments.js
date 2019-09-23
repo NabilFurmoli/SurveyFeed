@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Icon, Popup } from "semantic-ui-react";
 
 import { NavLink } from "reactstrap";
 
@@ -18,13 +18,23 @@ class Payments extends Component {
         token={token => this.props.handleStripeToken(token)}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
       >
-        <Button className="addCreditsLink" animated>
-          <Button.Content visible>Add Credits</Button.Content>
-          <Button.Content hidden>
-            <Icon className="mb-3" color="teal" name="credit card outline" />
-            Stripe
-          </Button.Content>
-        </Button>
+        <Popup
+          trigger={
+            <Button className="addCreditsLink" animated>
+              <Button.Content visible>Add Credits</Button.Content>
+              <Button.Content hidden>
+                <Icon
+                  className="mb-3"
+                  color="teal"
+                  name="credit card outline"
+                />
+                Stripe
+              </Button.Content>
+            </Button>
+          }
+          content="Feel secure To add credits to your account, we use Stripe as a third-party payment service, as of now to use the service for free, you can simply add fake data into the credit card form, except the Card Number should be 4242 4242 4242 4242."
+          basic
+        />
       </StripeCheckout>
     );
   }
