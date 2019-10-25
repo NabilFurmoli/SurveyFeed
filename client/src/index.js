@@ -1,27 +1,18 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
 
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
-
-// redux setup realted imports
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers'; // this is where reducers are combined and imported.
-import reduxThunk from 'redux-thunk';
-
-// these two line are just for email testing backend
-// import axios from 'axios';
-// window.axios = axios;
+// redux setup related imports
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import reducers from "./reducers"; // this is where reducers are combined and imported.
+import reduxThunk from "redux-thunk";
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
- document.querySelector('#root'));
-
-// hey
- //lightColor="#e6fff8"
- //DarkColor = "#00e6a8"
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);

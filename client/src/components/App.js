@@ -18,8 +18,10 @@ class App extends Component {
       <div className=" height-100 container">
         <BrowserRouter>
           <Route path="/" component={Header} />
-          <div onClick={this.props.bodyClickedFalsed} className=" height-100 d-flex flex-column">
-            
+          <div
+            onClick={this.props.bodyClickedFalsed}
+            className=" height-100 d-flex flex-column"
+          >
             {(() => {
               if (this.props.auth) {
                 return <Route exact path="/" component={Dashboard} />;
@@ -38,10 +40,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return { auth: state.auth }; // this object is what is passed as props into SongList components
+  // this object is what is passed as props into SongList components
+  return { auth: state.auth };
 };
 
 export default connect(
   mapStateToProps,
-  actions // selectSong is the actionCreater we imported
+  actions
 )(App);

@@ -3,7 +3,6 @@ import SurveyForm from "./SurveyForm";
 import SurveyFromReview from "./SurveyFormReview";
 import { reduxForm, Field } from "redux-form";
 
-
 class CreateSurvey extends React.Component {
   state = { displayReview: false };
 
@@ -32,6 +31,6 @@ class CreateSurvey extends React.Component {
 }
 
 export default reduxForm({
-    form: "surveyForm", // adds form values into the store.
+  // adds form values into the store.
+  form: "surveyForm"
 })(CreateSurvey);
-  

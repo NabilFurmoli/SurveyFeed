@@ -10,15 +10,11 @@ module.exports = survey => {
       <div style="text-align: center; display: flex; justify-content: center; align-items:center;">
 
           <button style="padding: 5px; color: white; border-style: none; background-color: teal; margin: 10px;" >
-              <a style="color: white; text-decoration: none;" href="${
-                keys.redirectDomain
-              }/api/surveys/${survey.id}/yes">Yes</a>
+              <a style="color: white; text-decoration: none;" href="${keys.redirectDomain}/api/surveys/${survey.id}/yes">Yes</a>
           </button>
 
           <button style="padding: 5px; color: #fff; border-style: none; background-color: teal; margin: 10px;">
-              <a style="color: #fff; text-decoration: none;" href="${
-                keys.redirectDomain
-              }/api/surveys/${survey.id}/no"> No </a>
+              <a style="color: #fff; text-decoration: none;" href="${keys.redirectDomain}/api/surveys/${survey.id}/no"> No </a>
           </button>
 
       </div>

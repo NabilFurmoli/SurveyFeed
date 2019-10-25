@@ -1,5 +1,4 @@
 import React from "react";
-//import { Segment } from 'semantic-ui-react'
 import { Col, Form, FormGroup, Label, Input } from "reactstrap";
 
 const SurveyField = props => {

@@ -1,0 +1,98 @@
+Date : 2019-10-25 01:52:35
+Directory : c:\Users\nabil\Desktop\c\Node and React (Full Stack)\Projects\server
+Total : 51 files,  19695 codes, 207 comments, 363 blanks, all 20265 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          5 |     18,167 |          0 |          6 |     18,173 |
+| JavaScript |         39 |      1,245 |        168 |        256 |      1,669 |
+| CSS        |          3 |        196 |          8 |         55 |        259 |
+| Markdown   |          2 |         43 |          0 |         38 |         81 |
+| HTML       |          1 |         31 |         26 |          2 |         59 |
+| Ignore     |          1 |         13 |          5 |          6 |         24 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                       | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                          |         51 |     19,695 |        207 |        363 |     20,265 |
+| client                                                     |         33 |     14,236 |        110 |        257 |     14,603 |
+| client\src                                                 |         24 |        893 |         71 |        159 |      1,123 |
+| client\src\components                                      |         14 |        682 |         22 |         96 |        800 |
+| client\src\components\pages                                |          9 |        368 |         19 |         63 |        450 |
+| client\public                                              |          5 |        242 |         34 |         58 |        334 |
+| client\src\components\pages\surveys                        |          5 |        217 |          7 |         38 |        262 |
+| routes                                                     |          3 |        136 |         36 |         27 |        199 |
+| services                                                   |          3 |        110 |         41 |         26 |        177 |
+| client\public\surveys                                      |          1 |         86 |          4 |         24 |        114 |
+| client\src\components\reusable                             |          3 |         71 |          2 |         14 |         87 |
+| client\src\components\pages\HomePage                       |          2 |         64 |          0 |          9 |         73 |
+| client\src\reducers                                        |          4 |         45 |          0 |         19 |         64 |
+| client\src\actions                                         |          2 |         45 |         11 |         14 |         70 |
+| models                                                     |          3 |         31 |          3 |         12 |         46 |
+| services\emailTemplates                                    |          1 |         29 |          0 |          1 |         30 |
+| config                                                     |          2 |         15 |          3 |          6 |         24 |
+| client\src\utils                                           |          1 |         12 |          0 |          6 |         18 |
+| middlewares                                                |          2 |         12 |          0 |          6 |         18 |
++------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                   | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------+------------+------------+------------+------------+------------+
+| README.md                                                  | Markdown   |          6 |          0 |          6 |         12 |
+| client\.gitignore                                          | Ignore     |         13 |          5 |          6 |         24 |
+| client\README.md                                           | Markdown   |         37 |          0 |         32 |         69 |
+| client\package-lock.json                                   | JSON       |     13,007 |          0 |          1 |     13,008 |
+| client\package.json                                        | JSON       |         44 |          0 |          1 |         45 |
+| client\public\index.css                                    | CSS        |         96 |          4 |         25 |        125 |
+| client\public\index.html                                   | HTML       |         31 |         26 |          2 |         59 |
+| client\public\index_queries.css                            | CSS        |         14 |          0 |          6 |         20 |
+| client\public\manifest.json                                | JSON       |         15 |          0 |          1 |         16 |
+| client\public\surveys\index.css                            | CSS        |         86 |          4 |         24 |        114 |
+| client\src\actions\index.js                                | JavaScript |         40 |         11 |         13 |         64 |
+| client\src\actions\types.js                                | JavaScript |          5 |          0 |          1 |          6 |
+| client\src\components\App.js                               | JavaScript |         41 |          0 |          7 |         48 |
+| client\src\components\Header.js                            | JavaScript |        202 |          1 |         12 |        215 |
+| client\src\components\pages\Dashboard.js                   | JavaScript |         24 |         12 |         12 |         48 |
+| client\src\components\pages\HomePage\IntroPage.js          | JavaScript |         36 |          0 |          4 |         40 |
+| client\src\components\pages\HomePage\Templates.js          | JavaScript |         28 |          0 |          5 |         33 |
+| client\src\components\pages\SurveyList.js                  | JavaScript |         63 |          0 |          4 |         67 |
+| client\src\components\pages\surveys\CreateSurvey.js        | JavaScript |         30 |          0 |          8 |         38 |
+| client\src\components\pages\surveys\SurveyField.js         | JavaScript |         24 |          2 |          5 |         31 |
+| client\src\components\pages\surveys\SurveyForm.js          | JavaScript |         78 |          2 |          9 |         89 |
+| client\src\components\pages\surveys\SurveyFormReview.js    | JavaScript |         66 |          1 |         12 |         79 |
+| client\src\components\pages\surveys\surveyTextareaField.js | JavaScript |         19 |          2 |          4 |         25 |
+| client\src\components\reusable\NoResponse.js               | JavaScript |         15 |          0 |          5 |         20 |
+| client\src\components\reusable\Payments.js                 | JavaScript |         41 |          2 |          4 |         47 |
+| client\src\components\reusable\YesResponse.js              | JavaScript |         15 |          0 |          5 |         20 |
+| client\src\index.js                                        | JavaScript |         13 |          7 |          8 |         28 |
+| client\src\reducers\authReducer.js                         | JavaScript |         12 |          0 |          5 |         17 |
+| client\src\reducers\frontEndReducers.js                    | JavaScript |         12 |          0 |          5 |         17 |
+| client\src\reducers\index.js                               | JavaScript |         11 |          0 |          4 |         15 |
+| client\src\reducers\surveysReducer.js                      | JavaScript |         10 |          0 |          5 |         15 |
+| client\src\serviceWorker.js                                | JavaScript |         92 |         31 |         13 |        136 |
+| client\src\setupProxy.js                                   | JavaScript |          4 |          0 |          3 |          7 |
+| client\src\utils\validateEmails.js                         | JavaScript |         12 |          0 |          6 |         18 |
+| config\prod.js                                             | JavaScript |         10 |          0 |          3 |         13 |
+| config\secrets.js                                          | JavaScript |          5 |          3 |          3 |         11 |
+| index.js                                                   | JavaScript |         44 |         14 |         19 |         77 |
+| middlewares\requireCredits.js                              | JavaScript |          6 |          0 |          3 |          9 |
+| middlewares\requireLogin.js                                | JavaScript |          6 |          0 |          3 |          9 |
+| models\Survey.js                                           | JavaScript |         15 |          0 |          4 |         19 |
+| models\recipient.js                                        | JavaScript |          7 |          0 |          4 |         11 |
+| models\user.js                                             | JavaScript |          9 |          3 |          4 |         16 |
+| package-lock.json                                          | JSON       |      5,061 |          0 |          1 |      5,062 |
+| package.json                                               | JSON       |         40 |          0 |          2 |         42 |
+| routes\authRoutes.js                                       | JavaScript |         15 |          6 |          7 |         28 |
+| routes\billingRoutes.js                                    | JavaScript |         16 |          4 |          6 |         26 |
+| routes\surveyRoutes.js                                     | JavaScript |        105 |         26 |         14 |        145 |
+| sendgrid_webhook.js                                        | JavaScript |          4 |          0 |          1 |          5 |
+| services\Mailer.js                                         | JavaScript |         44 |          2 |         17 |         63 |
+| services\emailTemplates\surveyTemplate.js                  | JavaScript |         29 |          0 |          1 |         30 |
+| services\passport.js                                       | JavaScript |         37 |         39 |          8 |         84 |
+| Total                                                      |            |     19,695 |        207 |        363 |     20,265 |
++------------------------------------------------------------+------------+------------+------------+------------+------------+

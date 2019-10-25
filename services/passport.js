@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 // one parameter mangoose.model() reads from database
 const User = mongoose.model("users");
 
-// this is called by passport when we are done with second argument of GoogleStrategy, meaning after we are given a user modal back from database.
+// this is called by passport when we are done with second argument of GoogleStrategy,
+// meaning after we are given a user modal back from database.
 passport.serializeUser((user, done) => {
   // user.id is sent to browser as token to identify this user.
   // user.id is not google id, its the id that mongodb provided for that specific user model instance.
@@ -33,7 +34,8 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       // after we asked google for profile info in line 34 ,using the code given,
-      // to us. thee passport got the progile info and now it calls the second argument of google strategy. her we can store those user info into our database.
+      // to us. thee passport got the progile info and now it calls the second argument of google strategy.
+      // here we can store those user info into our database.
       console.log("profile", profile);
       const existingUser = await User.findOne({ googleId: profile.id });
 
@@ -53,31 +55,3 @@ passport.use(
     }
   )
 );
-
-// passport.use(new GoogleStrategy(
-//     {
-//        clientID: keys.GoogleClientID,
-//        clientSecret: keys.GoogleClientSecret,
-//        callbackURL: '/auth/google/callback', // this has to added into your google api.
-//        proxy: true // this makes sure the google redirection is to https instead of http.
-//     }, (accessToken, refreshToken, profile, done) => {
-//         // after we asked google for profile info in line 34 ,using the code given,
-//         // to us. thee passport got the progile info and now it calls the second argument of google strategy. her we can store those user info into our database.
-
-//         User.findOne({googleId: profile.id}).then(existingUser => {
-//             // if user does not exist in DB, add it.
-//             if(existingUser){
-//                 console.log('user already exist');
-//                 // first parameter of done() is in case there was some error makeing the query
-//                 done(null, existingUser);
-//             } else {
-//                 // add it to database
-//                 // new User() creates new user isntance then save() adds it to the mongoDB.
-//                 new User({googleId: profile.id}).save().then( user => {
-//                     done(null, user);
-//                 });
-//                 console.log('profile', profile);
-//             }
-//         });
-//     }
-// ));

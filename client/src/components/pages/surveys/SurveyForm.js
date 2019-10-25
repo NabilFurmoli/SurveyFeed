@@ -1,11 +1,9 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
 import SurveyField from "./SurveyField";
-import SurveyTextareaField from './surveyTextareaField';
+import SurveyTextareaField from "./surveyTextareaField";
 import { Link } from "react-router-dom";
 import validateEmails from "../../../utils/validateEmails";
-
-// reduxFrom connect you to the  store similler how connect does in react-redux
 import { reduxForm, Field } from "redux-form";
 
 class SurveyForm extends React.Component {
@@ -58,7 +56,7 @@ class SurveyForm extends React.Component {
 }
 
 function validate(values) {
-  const errors = {}; // if error is returned empty reduc form thinks everyhting is fine, else does not proceed.
+  const errors = {};
 
   if (!values.title) {
     errors.title = "You must provide a title";
@@ -81,8 +79,10 @@ function validate(values) {
 }
 
 export default reduxForm({
-  validate: validate, // redux from takes a validate fucntion to validate inputs
-  form: "surveyForm", // adds form values into the store.
-  destroyOnUnmount: false // this does not allow the redux form to empty the values if we go to the other page
-  // and come back.
+  // redux from takes a validate fucntion to validate inputs
+  validate: validate,
+  // adds form values into the store.
+  form: "surveyForm",
+  // this does not allow the redux form to empty the values if we go to the other page and come back.
+  destroyOnUnmount: false
 })(SurveyForm);

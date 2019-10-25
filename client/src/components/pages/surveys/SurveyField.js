@@ -1,5 +1,4 @@
 import React from "react";
-//import { Segment } from 'semantic-ui-react'
 import { Col, Form, FormGroup, Label, Input } from "reactstrap";
 
 import { connect } from "react-redux";
@@ -26,5 +25,5 @@ const SurveyField = props => {
 
 export default connect(
   null,
-  actions // selectSong is the actionCreater we imported
+  actions
 )(SurveyField);
